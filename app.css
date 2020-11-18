@@ -1,0 +1,68 @@
+/* Your styles should be mobile-first and responsive */
+
+/** 
+  * If you are unclear on how to utilize a mobile-first, responsive technique to write your CSS, here is an example: 
+  *
+  * https://github.com/andreacardybailey/responsive_example/blob/master/styles/responsive-base.css 
+  *
+*/
+
+*{box-sizing: border-box;}
+
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+header{
+  
+  padding: 15px;
+}
+
+h1{
+  align-self: center;
+  text-align: center;
+  
+}
+
+main{
+  display: flex;
+  justify-content: center;
+
+}
+
+h2{
+  font-size: 16px;
+  text-align: center;
+  padding: 5px;
+}
+
+button{
+  margin: 2%;
+  padding: 2%;
+}
+
+img{
+  width: 75%;
+  height: 75%;
+}
+
+@media screen and (min-width: 0px) {
+  .welcomePage, .finalPage, .questionPage {
+      background-color: blue;
+      color: white;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      padding: 2% 2% 2% 2%;
+      margin: 2% 20% 2% 20%;
+      flex-direction: column;
+  }
+  button {
+      margin: 2%;
+  }
+}
