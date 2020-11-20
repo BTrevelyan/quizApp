@@ -52,7 +52,7 @@ img{
 }
 
 @media screen and (min-width: 0px) {
-  .welcomePage, .finalPage, .questionPage {
+  .welcomePage, .finalPage, .questionPage, .correctPage, .incorrectPage {
       background-color: blue;
       color: white;
       display: flex;

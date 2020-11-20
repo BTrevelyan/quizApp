@@ -135,16 +135,17 @@ function answerCheck(review) {
     }}
 }
 function generateIncorrectPage(){
-  html =  `<div class="incorrectPage">
-  <h2>Congrats! You completed the quiz!</h2>
+  return  `<div class="incorrectPage">
+  <h1>Incorrect!</h1>
+  <h2>The right answer was ${store.questions[store.questionNumber].correctAnswer}</h2>
   <h3>Correct: ${store.correct}</h3>
   <h3>Incorrect: ${store.incorrect}</h3>
   <button class="nextQuestion">Next Question?</button></div>`;  
 
 }
 function generateCorrectPage(){
-  html =  `<div class="correctPage">
-  <h2>Congrats! You completed the quiz!</h2>
+  return  `<div class="correctPage">
+  <h1>You got it right!</h1>
   <h3>Correct: ${store.correct}</h3>
   <h3>Incorrect: ${store.incorrect}</h3>
   <button class="nextQuestion">Next Question?</button></div>`;  
@@ -189,12 +190,21 @@ function handleRestart() {
   });
 }
 
+function handleNextQuestionFeedback(){
+  $('.nextQuestion').click(function(){
+    store.feedback=false;
+    answerCheck();
+    main();
+  });
+}
+
 function main(){
   renderQuizApp();
   handleStartQuiz();  
   handleSubmit();
   handleNextQuestion();
   handleRestart();
+  handleNextQuestionFeedback();
 }
 
 $(main());
