@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable strict */
@@ -108,21 +109,46 @@ function loadQuiz() {
 </div>`;
 }
 
+
+
 function answerCheck(review) {
   let i = store.questionNumber;
   let result = (review === store.questions[i].correctAnswer) ? 'Correct' : 'Incorrect';
-  if(result === 'Correct'){
-    store.correct += 1;
-    
-  } else {
-    store.incorrect += 1;
-  }
-  store.questionNumber++; 
-  if(store.questionNumber < store.questions.length) {
-    html = loadQuiz();
-  } else {
-    generateFinalPage();
-  }
+  if(store.feedback){
+    if(result === 'Correct'){
+      store.correct += 1;
+      console.log('correct');
+
+      html = generateCorrectPage();
+    } else {
+      store.incorrect += 1;
+      console.log('incorrect');
+      html = generateIncorrectPage();
+    }
+  }else{
+    store.questionNumber++; 
+  
+    if(store.questionNumber < store.questions.length) {
+      html = loadQuiz();
+    } else {
+      generateFinalPage();
+    }}
+}
+function generateIncorrectPage(){
+  html =  `<div class="incorrectPage">
+  <h2>Congrats! You completed the quiz!</h2>
+  <h3>Correct: ${store.correct}</h3>
+  <h3>Incorrect: ${store.incorrect}</h3>
+  <button class="nextQuestion">Next Question?</button></div>`;  
+
+}
+function generateCorrectPage(){
+  html =  `<div class="correctPage">
+  <h2>Congrats! You completed the quiz!</h2>
+  <h3>Correct: ${store.correct}</h3>
+  <h3>Incorrect: ${store.incorrect}</h3>
+  <button class="nextQuestion">Next Question?</button></div>`;  
+
 }
 
 function generateFinalPage(){
@@ -139,8 +165,9 @@ function generateFinalPage(){
 function handleSubmit() {
   $('.question-form').on('click', '.answerSubmit', event => {
     event.preventDefault();
-    let userAnswer = $("input[name='answer']:checked").val();
+    let userAnswer = $('input[name=\'answer\']:checked').val();
     if(userAnswer !== undefined) {
+      store.feedback = true;
       answerCheck(userAnswer);
       main();
     }
@@ -150,8 +177,8 @@ function handleSubmit() {
 
 function handleNextQuestion() {
   $('.submit').click(function(event) {
-    
-    main();
+    store.feedback = true;
+    renderQuizApp();
   });
 }
 
